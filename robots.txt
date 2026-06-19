@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jackslovelo.github.io/homezh-hth-com-cn/sitemap.xml

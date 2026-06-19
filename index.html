@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 知识库入口</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            color: #1e1e1e;
+            line-height: 1.7;
+        }
+
+        .page {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* 深色头部图区 */
+        .hero {
+            background: linear-gradient(145deg, #0a1b2e 0%, #132c44 100%);
+            color: #eef3f8;
+            padding: 64px 30px 56px;
+            border-radius: 0 0 36px 36px;
+            margin-bottom: 48px;
+            box-shadow: 0 12px 32px rgba(10, 27, 46, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -40px;
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 14px;
+            line-height: 1.2;
+            max-width: 70%;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 70%;
+            font-weight: 400;
+            border-left: 3px solid #4f9fda;
+            padding-left: 18px;
+        }
+
+        /* 知识库目录网格 */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 48px 0 40px;
+        }
+
+        .dir-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px 20px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02), 0 8px 24px rgba(0,20,40,0.04);
+            transition: all 0.2s ease;
+            border: 1px solid #e9edf1;
+        }
+
+        .dir-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0,30,50,0.06);
+            border-color: #cbd5e1;
+        }
+
+        .dir-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .dir-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #0a1b2e;
+        }
+
+        .dir-card p {
+            font-size: 0.92rem;
+            color: #3f4b5a;
+            line-height: 1.5;
+        }
+
+        /* 说明区 — 完整文章块 */
+        .content-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 36px 32px;
+            margin: 24px 0 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+            border: 1px solid #edf0f4;
+        }
+
+        .content-section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0a1b2e;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #dce4ec;
+            letter-spacing: -0.01em;
+        }
+
+        .content-section p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: #2a3746;
+        }
+
+        .content-section a {
+            color: #1b6fa3;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1.5px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .content-section a:hover {
+            color: #0d4a73;
+            border-bottom-color: #1b6fa3;
+        }
+
+        .highlight-box {
+            background: #f3f7fb;
+            border-left: 5px solid #1b6fa3;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 28px 0 18px;
+            font-size: 0.97rem;
+            color: #1f3140;
+        }
+
+        .info-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin: 40px 0 20px;
+        }
+
+        .info-cols .col {
+            flex: 1 1 200px;
+            min-width: 160px;
+        }
+
+        .info-cols .col h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #132c44;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-cols .col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-cols .col ul li {
+            padding: 4px 0;
+            font-size: 0.92rem;
+            color: #3b4b5c;
+            display: flex;
+            gap: 8px;
+        }
+
+        .info-cols .col ul li::before {
+            content: '·';
+            color: #4f9fda;
+            font-weight: 700;
+        }
+
+        .faq-preview {
+            margin: 40px 0 10px;
+            padding: 24px 28px;
+            background: #f6f9fc;
+            border-radius: 20px;
+        }
+
+        .faq-preview h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0a1b2e;
+        }
+
+        .faq-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #dee6ed;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1a3a54;
+            margin-bottom: 4px;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #2f4052;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* 提示区 */
+        .tip-banner {
+            background: #edf4fa;
+            border-radius: 18px;
+            padding: 18px 26px;
+            margin: 28px 0 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 0.95rem;
+            border: 1px solid #d5e0eb;
+        }
+
+        .tip-banner .tip-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .tip-banner .tip-text {
+            flex: 1;
+        }
+
+        .tip-banner a {
+            color: #1b6fa3;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .tip-banner a:hover {
+            color: #0d4a73;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 2rem;
+                max-width: 100%;
+            }
+            .hero .sub {
+                max-width: 100%;
+                font-size: 1rem;
+            }
+            .hero {
+                padding: 40px 20px 36px;
+            }
+            .directory-grid {
+                grid-template-columns: 1fr;
+            }
+            .content-section {
+                padding: 24px 18px;
+            }
+            .info-cols {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                padding: 0 12px 40px;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 深色头部 -->
+        <div class="hero">
+            <h1>华体会 · 知识库入口</h1>
+            <div class="sub">持续关注 · 再次访问 · 系统化理解</div>
+        </div>
+
+        <!-- 目录感卡片（知识分类） -->
+        <div class="directory-grid">
+            <div class="dir-card">
+                <span class="icon">📘</span>
+                <h3>术语与背景</h3>
+                <p>核心概念、命名由来、品牌沿革与使用场景说明</p>
+            </div>
+            <div class="dir-card">
+                <span class="icon">📎</span>
+                <h3>使用指引</h3>
+                <p>平台功能路径、环境要求、常见流程概览</p>
+            </div>
+            <div class="dir-card">
+                <span class="icon">⚙️</span>
+                <h3>特性与场景</h3>
+                <p>适配方向、交互特点、典型应用领域归纳</p>
+            </div>
+            <div class="dir-card">
+                <span class="icon">🔖</span>
+                <h3>收藏与回溯</h3>
+                <p>书签管理、更新追踪、历史记录与持续学习</p>
+            </div>
+        </div>
+
+        <!-- 说明区：再次访问与收藏视角 -->
+        <div class="content-section">
+            <h2>为何建立知识库入口</h2>
+            <p>对于经常查阅资料或跟踪平台动态的用户而言，一个结构清晰、可反复回归的入口能大幅降低信息检索成本。<a href="https://homezh-hth.com.cn">华体会</a>所涵盖的内容体系涉及多维度知识点，从初始了解进阶到深度应用，常常需要分阶段消化。本页采用目录化布局，将信息按主题归类，方便你根据当前需要快速定位。</p>
+            <p>将本页加入浏览器书签或收藏夹，即可在后续任何时间返回核心索引区。知识库本身也会随平台迭代而补充更新，保持内容的相关性。建议每隔一段时间重新浏览各卡片分区，或许能发现此前忽略的细节。</p>
+
+            <!-- 提示区嵌入 -->
+            <div class="tip-banner">
+                <span class="tip-icon">💡</span>
+                <div class="tip-text">
+                    <strong>收藏提示：</strong> 如果你觉得本索引页有长期参考价值，可使用浏览器“添加到收藏夹”或“书签”功能。同时，<a href="https://homezh-hth.com.cn">华体会</a> 主站也提供最新动态与详细文档，两者配合使用效果更佳。
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>关于持续关注</strong> — 信息环境会发生变化，建议定期回访本入口页以及关联站点，以获取最新的调整说明与补充材料。保持开放的学习节奏，远比一次性浏览更有收获。
+            </div>
+        </div>
+
+        <!-- 相关信息区（两列） -->
+        <div class="info-cols">
+            <div class="col">
+                <h4>📌 相关链接</h4>
+                <ul>
+                    <li>平台主页 —— <a href="https://homezh-hth.com.cn">华体会</a></li>
+                    <li>常见问题摘要（见下方）</li>
+                    <li>使用环境与建议</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>🗂️ 经常翻阅</h4>
+                <ul>
+                    <li>术语对照表</li>
+                    <li>场景分类索引</li>
+                    <li>更新日志与公告</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>📖 阅读建议</h4>
+                <ul>
+                    <li>从“术语背景”开始</li>
+                    <li>再阅读“使用指引”</li>
+                    <li>最后浏览特性场景</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要区 -->
+        <div class="faq-preview">
+            <h3>❓ 常见问题摘要</h3>
+            <div class="faq-item">
+                <strong>如何快速找到之前的浏览位置？</strong>
+                <p>建议使用浏览器书签功能保存本入口页，同时可配合历史记录或笔记工具记录每次的阅读进度。</p>
+            </div>
+            <div class="faq-item">
+                <strong>知识库内容会更新吗？</strong>
+                <p>是的，随着 <a href="https://homezh-hth.com.cn">华体会</a> 相关信息的补充，本索引页面会进行阶段性调整，保证目录与提示的时效性。</p>
+            </div>
+            <div class="faq-item">
+                <strong>为什么强调“再次访问”视角？</strong>
+                <p>很多有价值的信息并非一次就能完全吸收，建立回溯习惯能够帮助构建更系统的认知框架，减少重复查找的精力消耗。</p>
+            </div>
+        </div>
+
+        <!-- 底部安静提示 -->
+        <div style="margin-top: 48px; font-size: 0.85rem; color: #66788a; border-top: 1px solid #e2e8ef; padding-top: 20px; text-align: center;">
+            知识库入口 · 保持开放与持续关注
+        </div>
+    </div>
+</body>
+</html>
