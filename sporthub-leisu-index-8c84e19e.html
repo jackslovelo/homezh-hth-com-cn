@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷速 · 轻量导航与场景说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1e1e1e;
+            background-color: #f7f8fa;
+        }
+
+        /* 深色头图 */
+        .header-hero {
+            background: linear-gradient(135deg, #0b1a2e 0%, #1a2f44 100%);
+            color: #f0f3f7;
+            padding: 1.2rem 2rem 3.5rem 2rem;
+            text-align: center;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.8rem 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 2.8rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        .nav-bar a {
+            color: #cddae8;
+            text-decoration: none;
+            transition: color 0.2s;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-bar a:hover {
+            color: #ffffff;
+            border-bottom-color: #f6b26b;
+        }
+
+        .hero-content h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+        .hero-content p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #bccbd9;
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem 1.5rem;
+        }
+
+        .intro-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2.8rem;
+        }
+
+        .intro-card h2 {
+            font-size: 1.6rem;
+            font-weight: 450;
+            color: #0b1a2e;
+            margin-bottom: 0.75rem;
+        }
+        .intro-card p {
+            color: #2c3e4f;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .intro-card a {
+            color: #b35c1e;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 450;
+        }
+        .intro-card a:hover {
+            color: #854614;
+        }
+
+        /* 三个场景模块 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.8rem;
+            margin: 2.5rem 0 3rem 0;
+        }
+        .scene-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.4rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s, box-shadow 0.2s;
+            border: 1px solid #eceef2;
+        }
+        .scene-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border-color: #d9dde3;
+        }
+        .scene-item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0b1a2e;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .scene-item p {
+            color: #3a4d5e;
+            font-size: 0.95rem;
+        }
+        .scene-item .tag {
+            display: inline-block;
+            background: #ecf2f9;
+            color: #1a3a52;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            margin-top: 0.7rem;
+        }
+
+        /* 常见说明区域 */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+        .faq-summary h2 {
+            font-size: 1.4rem;
+            font-weight: 450;
+            color: #0b1a2e;
+            margin-bottom: 1.2rem;
+        }
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+        .faq-item strong {
+            display: block;
+            color: #1f3b4f;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        .faq-item p {
+            color: #3b4f60;
+            font-size: 0.95rem;
+            margin-left: 0.5rem;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #6f7f8e;
+            text-align: center;
+            border-top: 1px solid #e2e6ec;
+            padding-top: 2.2rem;
+            margin-top: 1rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 820px) {
+            .scenes-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 540px) {
+            .header-hero {
+                padding: 1rem 1rem 2.8rem 1rem;
+            }
+            .hero-content h1 {
+                font-size: 1.9rem;
+            }
+            .nav-bar {
+                gap: 1rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            .container {
+                padding: 1.5rem 1rem 3rem 1rem;
+            }
+            .scenes-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .intro-card, .faq-summary {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 + 顶部导航 -->
+    <header class="header-hero">
+        <div class="nav-bar">
+            <a href="#">首页</a>
+            <a href="#">场景</a>
+            <a href="#">说明</a>
+            <a href="#">帮助</a>
+        </div>
+        <div class="hero-content">
+            <h1>雷速 · 稳定入口</h1>
+            <p>日常使用中一个清爽的起点，少跳转、多省心。页面仅做基础信息说明，不收集任何私人数据。</p>
+        </div>
+    </header>
+
+    <!-- 浅色正文区 -->
+    <div class="container">
+
+        <!-- 核心介绍：自然嵌入链接 -->
+        <div class="intro-card">
+            <h2>关于雷速</h2>
+            <p>
+                如果你常需要快速访问某些体育或资讯类内容，可能会发现一个干净直接的门户很重要。
+                <a href="https://sporthub-leisu.com">雷速</a> 的定位就是提供一个相对稳定的信息聚合入口，省去每次都要翻找书签的麻烦。
+                页面结构偏向轻量，尽量不干扰你原本的浏览节奏。
+            </p>
+            <p>
+                这里不做推荐或排名，只把它当做一个普通工具页面来使用就好。熟悉之后，你甚至只需要记住这个地址即可。
+            </p>
+        </div>
+
+        <!-- 三个场景模块 -->
+        <div class="scenes-grid">
+            <div class="scene-item">
+                <h3>📋 日常速览</h3>
+                <p>打开浏览器后习惯先扫一眼最新动态，雷速聚合了多个常见信息源，省掉单独开标签页的步骤。</p>
+                <span class="tag">轻量切换</span>
+            </div>
+            <div class="scene-item">
+                <h3>📆 赛前准备</h3>
+                <p>赛前想快速确认时间、对阵或往期数据，直接通过页面导航跳转，比临时搜索更节省耐心。</p>
+                <span class="tag">结构清晰</span>
+            </div>
+            <div class="scene-item">
+                <h3>🔖 固定入口</h3>
+                <p>把雷速设为主页或书签栏常驻位，每次上网就从这里开始，避免被各种推送分散注意力。</p>
+                <span class="tag">减少跳转</span>
+            </div>
+        </div>
+
+        <!-- 常见说明 FAQ 摘要 -->
+        <div class="faq-summary">
+            <h2>常见说明 · 摘要</h2>
+            <div class="faq-item">
+                <strong>这个页面是官方吗？</strong>
+                <p>不是。雷速是一个独立维护的导航页面，与任何机构无附属关系。内容仅供个人参考。</p>
+            </div>
+            <div class="faq-item">
+                <strong>链接是否会失效？</strong>
+                <p>外部资源偶尔会变化，如果遇到打不开的情况，可以稍后再试，或通过搜索找到最新地址。</p>
+            </div>
+            <div class="faq-item">
+                <strong>页面会收集信息吗？</strong>
+                <p>本页为纯静态内容，不设置任何跟踪脚本或表单，不记录访问行为，隐私方面可以放心。</p>
+            </div>
+            <div class="faq-item">
+                <strong>如何反馈问题？</strong>
+                <p>目前没有专门反馈渠道，如果你有好的建议，可以通过社交平台或邮件联系维护者。</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            雷速 · 仅作为一个轻量入口存在 &nbsp;|&nbsp; 版本 2025.04
+        </div>
+    </div>
+
+</body>
+</html>
