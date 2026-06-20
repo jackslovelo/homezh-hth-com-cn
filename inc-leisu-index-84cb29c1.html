@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雷速 · 资料整理与信息索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f3f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1f2d3d;
+      line-height: 1.6;
+      padding: 2rem 1.2rem;
+    }
+
+    .page-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* hero 组件 */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e6e9ed;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .hero-card:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-card h1 {
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a2633;
+    }
+
+    .hero-card .tagline {
+      font-size: 1rem;
+      color: #5b6c7e;
+      border-left: 4px solid #a0b0c2;
+      padding-left: 1rem;
+      margin: 0.8rem 0 1rem;
+    }
+
+    .hero-card p {
+      color: #2c3e50;
+      margin-top: 0.6rem;
+      max-width: 90%;
+    }
+
+    /* 网格卡片系统 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 680px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e3e8ef;
+      border-radius: 16px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #1f2a36;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #2f3e52;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0.2rem;
+    }
+
+    .card ul li::before {
+      content: "·";
+      color: #8f9eb0;
+      font-weight: bold;
+      display: inline-block;
+      width: 1.2rem;
+      margin-left: -0.2rem;
+    }
+
+    .badge {
+      background: #e7ebf2;
+      color: #2b3a4b;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 40px;
+      padding: 0.15rem 0.7rem;
+      display: inline-block;
+      border: 1px solid #d4dbe4;
+    }
+
+    /* 提示区块 */
+    .notice-box {
+      background: #f9fafc;
+      border: 1px solid #dce2eb;
+      border-radius: 40px;
+      padding: 1.2rem 1.6rem;
+      margin: 1.2rem 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.4rem 0.8rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+
+    .notice-box span:first-child {
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    .notice-box a {
+      color: #1f3a5f;
+      text-decoration: none;
+      border-bottom: 1.5px solid #c4d0e0;
+      font-weight: 500;
+      padding-bottom: 1px;
+      transition: border-color 0.15s;
+    }
+
+    .notice-box a:hover {
+      border-bottom-color: #1f3a5f;
+    }
+
+    .inline-link {
+      color: #1f3a5f;
+      text-decoration: none;
+      border-bottom: 1px solid #b8c6d8;
+      font-weight: 450;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #1f3a5f;
+      color: #0a1f33;
+    }
+
+    .faq-mini {
+      background: #ffffff;
+      border: 1px solid #e3e8ef;
+      border-radius: 16px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      margin: 1.8rem 0;
+    }
+
+    .faq-mini details {
+      border-bottom: 1px solid #edf0f5;
+      padding: 0.8rem 0;
+    }
+
+    .faq-mini details:last-child {
+      border-bottom: none;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: #1f2d3d;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-mini summary::before {
+      content: "›";
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: #7f8fa3;
+      margin-right: 0.3rem;
+      transition: transform 0.2s;
+    }
+
+    .faq-mini details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-mini .answer {
+      padding: 0.6rem 0 0.2rem 1.6rem;
+      color: #3f5065;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #728295;
+      margin-top: 2.8rem;
+      border-top: 1px solid #dde3ec;
+      padding-top: 1.8rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e1e7ef;
+      margin: 2rem 0 1.2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+  <!-- hero 区：摘要 -->
+  <div class="hero-card">
+    <h1>雷速 · 资料整理与信息索引</h1>
+    <div class="tagline">从零散到有序，让需要的内容更近一步</div>
+    <p>
+      日常浏览、工作归档、兴趣收藏——网络上的信息越积越多，真正需要的时候却很难快速定位。<a href="https://inc-leisu.com" class="inline-link">雷速</a> 围绕资料整理和信息索引的思路，帮你把分散的内容提炼成可检索的结构，减少反复查找的精力消耗。
+    </p>
+  </div>
+
+  <!-- 双栏：亮点 + 使用建议 -->
+  <div class="grid-2">
+    <div class="card">
+      <h3>📌 几个亮点</h3>
+      <ul>
+        <li>以「索引」代替堆叠，适应不同场景下的分类习惯</li>
+        <li>轻量结构，不依赖复杂数据库，日常维护成本低</li>
+        <li>支持条目备注、标签与时间标注，回溯时更清晰</li>
+        <li>页面响应快，资料打开与浏览感觉流畅</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🧩 使用建议</h3>
+      <p>
+        不必一次性整理所有内容，可以从一个主题或一个文件夹开始。重点记录那些经常需要回顾但容易遗忘的信息，比如工具参数、会议要点、学习笔记。用 <strong>雷速</strong> 的索引标记代替记忆负担，逐渐形成自己的知识地图。
+      </p>
+      <p style="margin-top: 0.5rem">
+        <span class="badge">渐进式</span>
+        <span class="badge">按需分类</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- 可信但克制的访问说明 -->
+  <div class="notice-box">
+    <span>🔍 访问说明</span>
+    <span>—</span>
+    <span><a href="https://inc-leisu.com">雷速</a> 是一个辅助资料整理的轻量站点，不收集个人隐私数据，不诱导注册或付费。所有功能均基于开源前端逻辑，你可以随时使用、随时停止。若在浏览中遇到任何疑问，可通过站内反馈通道联系维护者。</span>
+  </div>
+
+  <!-- 场景卡片（额外差异化内容） -->
+  <div class="card" style="margin-bottom: 1.8rem;">
+    <h3>🗂️ 适合这样用</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem 1.2rem; margin-top: 0.4rem;">
+      <div style="flex: 1 1 180px;">
+        <p><strong>学习整理</strong><br>把课程大纲、参考资料、笔记统一索引，复习时直接定位。</p>
+      </div>
+      <div style="flex: 1 1 180px;">
+        <p><strong>工作归档</strong><br>项目文档、沟通记录、验收清单——按阶段归拢，避免散落。</p>
+      </div>
+      <div style="flex: 1 1 180px;">
+        <p><strong>兴趣收藏</strong><br>食谱、旅行攻略、影单……收藏夹太乱？用标签索引代替无序堆积。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <h3 style="font-weight: 600; font-size: 1.2rem; margin-bottom: 0.2rem; color: #1f2a36;">❓ 常见想法</h3>
+    <details>
+      <summary>需要自己搭建服务器吗？</summary>
+      <div class="answer">不需要。站点基于静态页面运行，你只需一个浏览器。所有索引信息存储在你本机，不经过外部服务器。</div>
+    </details>
+    <details>
+      <summary>资料会不会莫名其妙丢失？</summary>
+      <div class="answer">内容由你手动管理，系统不会自动删除任何条目。建议定期将索引数据导出备份，操作习惯和安全策略由你掌控。</div>
+    </details>
+    <details>
+      <summary>与笔记软件相比有何不同？</summary>
+      <div class="answer"><a href="https://inc-leisu.com" class="inline-link">雷速</a> 更侧重于“索引”而非“写作”。你可以把它看作一个可自定义的目录面板，适合快速定位那些已经存在、但容易忘记位置的信息。</div>
+    </details>
+  </div>
+
+  <hr>
+
+  <footer>
+    基于资料整理与索引的思路 · 保持简单和透明 · 2025
+  </footer>
+</div>
+</body>
+</html>
